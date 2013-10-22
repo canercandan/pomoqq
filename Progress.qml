@@ -9,6 +9,8 @@ ProgressBar {
     signal reset
     signal increment
 
+    property bool editable: true
+
     onReset: { value = 0 }
     onIncrement: {
         if (value < maximumValue) {
@@ -26,7 +28,8 @@ ProgressBar {
     MouseArea {
         anchors.fill: parent
         onClicked: {
-            increment()
+            if (!editable) return;
+            increment();
             console.log('progress manually changed ' + value + '/' + maximumValue)
         }
     }

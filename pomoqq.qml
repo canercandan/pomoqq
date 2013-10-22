@@ -4,11 +4,15 @@ import QtQuick.Window 2.0
 import QtQuick.Dialogs 1.0
 import QtQuick.Layouts 1.0
 import QtMultimedia 5.0
+import QtQuick.LocalStorage 2.0
 
 ApplicationWindow {
     id: pomoqq
     title: "PomoQQ"
     color: pomodoroColor
+    flags: flags | Qt.Dialog | Qt.WindowStaysOnTopHint
+    width: 222; height: 195
+    maximumWidth: 222; maximumHeight: 300
 
     property string pomodoroColor: "#8F3D3D"
     property string shortBreakColor: "#547d14"
@@ -21,11 +25,14 @@ ApplicationWindow {
     property int setNumber: 4
     property int pomodoroNumber: 48
     property bool isBreak: false
+    property bool progressTimeEditable: false
 
     signal changeColor
     signal changeState
     signal nextState
     signal reset
+
+    onVisibleChanged: console.log('visible')
 
     onChangeColor: {
         if (!isBreak) {
@@ -92,9 +99,6 @@ ApplicationWindow {
             Layout.fillWidth: true
         }
 
-        Progress { id: pomodoroProgress; maximumValue: pomodoroNumber; Layout.fillWidth: true }
-        Progress { id: setProgress; maximumValue: setNumber; Layout.fillWidth: true }
-
         RowLayout {
             Display { id: minutes; pointSize: pointSize; value: { minutesProgress.countDown() } }
             Point { id: point; pointSize: pointSize; onCountOut: secondsProgress.countIn() }
@@ -107,6 +111,8 @@ ApplicationWindow {
                 maximumValue: pomodoroTime
                 Layout.fillWidth: true
                 onCountOut: nextState()
+                editable: pomoqq.progressTimeEditable
+                visible: pomoqq.progressTimeEditable
             }
 
             TimeProgress {
@@ -115,6 +121,8 @@ ApplicationWindow {
                 value: 59
                 Layout.fillWidth: true
                 onCountOut: minutesProgress.countIn()
+                editable: pomoqq.progressTimeEditable
+                visible: pomoqq.progressTimeEditable
             }
         }
 
@@ -140,5 +148,8 @@ ApplicationWindow {
                 }
             }
         }
+
+        Progress { id: pomodoroProgress; maximumValue: pomodoroNumber; Layout.fillWidth: true }
+        Progress { id: setProgress; maximumValue: setNumber; Layout.fillWidth: true }
     }
 }

@@ -1,10 +1,11 @@
-pomoqq
+PomoQQ
 ======
 
 Yet another Pomodoro timer fully written this time thanks to Qt Quick
 
+![PomoQQ](https://github.com/canercandan/pomoqq/raw/master/doc/screenshot.png "PomoQQ") 
 
-how to
+How to
 ======
 
 Install Qt 5.1 and Qt Quick libraries and start pomoqq with the following command:
@@ -12,7 +13,7 @@ Install Qt 5.1 and Qt Quick libraries and start pomoqq with the following comman
 $ qmlscene pomoqq.qml
 
 
-other pomodoro timers
+Other pomodoro timers
 =====================
 
 * [tomighty](http://www.tomighty.org/)

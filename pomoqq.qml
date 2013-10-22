@@ -61,8 +61,8 @@ ApplicationWindow {
         }
     }
 
-    SoundEffect { id: ticking; source: "ticking.wav" }
-    SoundEffect { id: alarm;   source: "alarm.wav" }
+    SoundEffect { id: ticking; source: "sounds/ticking.wav" }
+    SoundEffect { id: alarm;   source: "sounds/alarm.wav" }
 
     ColumnLayout {
         Text {

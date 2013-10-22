@@ -10,8 +10,9 @@ How to
 
 Install Qt 5.1 and Qt Quick libraries and start pomoqq with the following command:
 
-$ qmlscene pomoqq.qml
-
+<code>
+qmlscene pomoqq.qml
+</code>
 
 Other pomodoro timers
 =====================

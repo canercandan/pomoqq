@@ -23,7 +23,9 @@ ApplicationWindow {
     property bool isBreak: false
 
     signal changeColor
+    signal changeState
     signal nextState
+    signal reset
 
     onChangeColor: {
         if (!isBreak) {
@@ -33,21 +35,37 @@ ApplicationWindow {
         }
     }
 
+    onChangeState: {
+        console.log('changeState');
+        changeColor();
+        if (!isBreak) {
+            minutesProgress.maximumValue = (setProgress.value < setNumber-1) ? shortBreakTime : longBreakTime
+        } else {
+            minutesProgress.maximumValue = pomodoroTime;
+        }
+        reset()
+        isBreak = !isBreak;
+    }
+
     onNextState: {
         console.log('nextState');
         timer.stop();
         alarm.play();
-        changeColor();
         if (!isBreak) {
-            minutesProgress.maximumValue = (setProgress.value < setNumber-1) ? shortBreakTime : longBreakTime
             setProgress.increment()
             pomodoroProgress.increment()
         } else {
-            minutesProgress.maximumValue = pomodoroTime;
             if (setProgress.value >= setNumber) { setProgress.reset() }
         }
-        isBreak = !isBreak;
+        changeState()
         timer.start()
+    }
+
+    onReset: {
+        minutesProgress.reset();
+        secondsProgress.reset();
+        secondsProgress.value = secondsProgress.maximumValue;
+        point.reset()
     }
 
     Timer {
@@ -57,7 +75,7 @@ ApplicationWindow {
         onTriggered: {
             point.countIn();
             ticking.play();
-            console.log('timer ' + minutes.times + ':' + seconds.times)
+            console.log('timer ' + minutes.value + ':' + seconds.value)
         }
     }
 
@@ -78,9 +96,9 @@ ApplicationWindow {
         Progress { id: setProgress; maximumValue: setNumber; Layout.fillWidth: true }
 
         RowLayout {
-            Display { id: minutes; pointSize: pointSize; value: { minutesProgress.value } }
-            Point { id: point; pointSize: pointSize; onCountOut: secondsProgress.countIn(); }
-            Display { id: seconds; pointSize: pointSize; value: { secondsProgress.value } }
+            Display { id: minutes; pointSize: pointSize; value: { minutesProgress.countDown() } }
+            Point { id: point; pointSize: pointSize; onCountOut: secondsProgress.countIn() }
+            Display { id: seconds; pointSize: pointSize; value: { secondsProgress.countDown() } }
         }
 
         ColumnLayout {
@@ -94,17 +112,33 @@ ApplicationWindow {
             TimeProgress {
                 id: secondsProgress
                 maximumValue: 59
+                value: 59
                 Layout.fillWidth: true
                 onCountOut: minutesProgress.countIn()
             }
         }
 
-        // StartButton { Layout.fillWidth: true }
-        Button {
-            id: startButton
-            text: { !timer.running ? "Start pomodoro" : "Interrupt" }
-            onClicked: { timer.running = !timer.running }
-            Layout.fillWidth: true
+        RowLayout {
+            Button {
+                id: startButton
+                text: { !timer.running ? "Start" : "Interrupt" }
+                Layout.fillWidth: true
+
+                onClicked: {
+                    timer.running = !timer.running;
+                    if (!timer.running) { reset() }
+                }
+            }
+
+            Button {
+                id: switchButton
+                text: { isBreak ? "Pomodoro" : "Break" }
+                Layout.fillWidth: true
+
+                onClicked: {
+                    changeState()
+                }
+            }
         }
     }
 }

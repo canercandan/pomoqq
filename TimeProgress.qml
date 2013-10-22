@@ -6,11 +6,13 @@ Progress {
     signal countOut
 
     function countIn() {
-        if (value < maximumValue-1) {
+        if (value < maximumValue) {
             increment()
         } else {
             reset();
             countOut()
         }
     }
+
+    function countDown() { return maximumValue - value }
 }

@@ -16,6 +16,13 @@ Install Qt 5.1 and Qt Quick libraries and start pomoqq with the following comman
 qmlscene pomoqq.qml
 </code>
 
+About the technique
+===================
+
+The Pomodoro Technique® is a simple way to boost your productivity when performing
+mind-consuming tasks. It helps you keep yourself focused while reducing mental exhaustion.
+Read more about it at [the official website](http://www.pomodorotechnique.com/).
+
 Other pomodoro timers
 =====================
 

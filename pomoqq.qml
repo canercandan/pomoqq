@@ -81,12 +81,17 @@ ApplicationWindow {
 
         onTriggered: {
             point.countIn();
-            ticking.play();
+            if (!isBreak) {
+                ticking.play();
+            } else {
+                break_ticking.play();
+            }
             console.log('timer ' + minutes.value + ':' + seconds.value)
         }
     }
 
     SoundEffect { id: ticking; source: "sounds/ticking.wav" }
+    SoundEffect { id: break_ticking; source: "sounds/break_ticking.wav" }
     SoundEffect { id: alarm;   source: "sounds/alarm.wav" }
 
     ColumnLayout {

@@ -29,7 +29,7 @@ ApplicationWindow {
 
     onChangeColor: {
         if (!isBreak) {
-            color = (setProgress.value < setNumber-1) ? shortBreakColor : longBreakColor
+            color = (setProgress.value < setNumber) ? shortBreakColor : longBreakColor
         } else {
             color = pomodoroColor
         }
@@ -39,7 +39,7 @@ ApplicationWindow {
         console.log('changeState');
         changeColor();
         if (!isBreak) {
-            minutesProgress.maximumValue = (setProgress.value < setNumber-1) ? shortBreakTime : longBreakTime
+            minutesProgress.maximumValue = (setProgress.value < setNumber) ? shortBreakTime : longBreakTime
         } else {
             minutesProgress.maximumValue = pomodoroTime;
         }

@@ -3,7 +3,9 @@ PomoQQ
 
 Yet another Pomodoro timer fully written this time thanks to Qt Quick
 
-![PomoQQ](https://github.com/canercandan/pomoqq/raw/master/doc/screenshot.png "PomoQQ") 
+![PomoQQ](https://github.com/canercandan/pomoqq/raw/master/doc/screenshot.png "PomoQQ")
+![PomoQQ](https://github.com/canercandan/pomoqq/raw/master/doc/screenshot_short_break.png "PomoQQ Short Break")
+![PomoQQ](https://github.com/canercandan/pomoqq/raw/master/doc/screenshot_long_break.png "PomoQQ Long Break")
 
 How to
 ======

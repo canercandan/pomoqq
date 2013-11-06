@@ -11,8 +11,8 @@ ApplicationWindow {
     title: "PomoQQ"
     color: pomodoroColor
     flags: flags | Qt.Dialog | Qt.WindowStaysOnTopHint
-    width: 222; height: 195
-    maximumWidth: 222; maximumHeight: 300
+    width: 222; height: 225
+    maximumWidth: 222; maximumHeight: 330
 
     property string pomodoroColor: "#8F3D3D"
     property string shortBreakColor: "#547d14"
@@ -23,6 +23,7 @@ ApplicationWindow {
     property int shortBreakTime: 5
     property int longBreakTime: 15
     property int setNumber: 4
+    property int interruptionNumber: 50
     property int pomodoroNumber: 48
     property bool isBreak: false
     property bool progressTimeEditable: false
@@ -49,6 +50,7 @@ ApplicationWindow {
             minutesProgress.maximumValue = (setProgress.value < setNumber) ? shortBreakTime : longBreakTime
         } else {
             minutesProgress.maximumValue = pomodoroTime;
+            interruptionProgress.reset();
         }
         reset()
         isBreak = !isBreak;
@@ -81,7 +83,9 @@ ApplicationWindow {
 
         onTriggered: {
             point.countIn();
-            if (!isBreak) {
+            if (!(minutes.value % 5) && !seconds.value) {
+                fiveminuteleft.play();
+            } else if (!isBreak) {
                 ticking.play();
             } else {
                 break_ticking.play();
@@ -93,6 +97,7 @@ ApplicationWindow {
     SoundEffect { id: ticking; source: "sounds/ticking.wav" }
     SoundEffect { id: break_ticking; source: "sounds/break_ticking.wav" }
     SoundEffect { id: alarm;   source: "sounds/alarm.wav" }
+    SoundEffect { id: fiveminuteleft;   source: "sounds/5left.wav" }
 
     ColumnLayout {
         Text {
@@ -152,9 +157,25 @@ ApplicationWindow {
                     changeState()
                 }
             }
+
+            /*
+            Button {
+                id: progressButton
+                text: "o"
+                Layout.fillWidth: true
+
+                property bool isVisible: false
+
+                onClicked: {
+                    pomoqq.height = (!isVisible) ? 220 : 195
+                    isVisible = !isVisible
+                }
+            }
+            */
         }
 
         Progress { id: pomodoroProgress; maximumValue: pomodoroNumber; Layout.fillWidth: true }
         Progress { id: setProgress; maximumValue: setNumber; Layout.fillWidth: true }
+        Progress { id: interruptionProgress; maximumValue: interruptionNumber; Layout.fillWidth: true }
     }
 }

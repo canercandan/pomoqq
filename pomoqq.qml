@@ -83,7 +83,7 @@ ApplicationWindow {
 
         onTriggered: {
             point.countIn();
-            if (!(minutes.value % 5) && !seconds.value) {
+            if ((minutes.value < 5 || !(minutes.value % 5)) && !seconds.value) {
                 fiveminuteleft.play();
             } else if (!isBreak) {
                 ticking.play();

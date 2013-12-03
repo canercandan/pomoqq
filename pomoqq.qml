@@ -12,7 +12,6 @@ ApplicationWindow {
     color: pomodoroColor
     flags: flags | Qt.Dialog | Qt.WindowStaysOnTopHint
     width: 222; height: 225
-    maximumWidth: 222; maximumHeight: 330
 
     property string pomodoroColor: "#8F3D3D"
     property string shortBreakColor: "#547d14"
@@ -100,6 +99,9 @@ ApplicationWindow {
     SoundEffect { id: fiveminuteleft;   source: "sounds/5left.wav" }
 
     ColumnLayout {
+        width: parent.width
+        height: parent.height
+
         Text {
             text: "PomoQQ"
             font.bold: true
@@ -110,9 +112,9 @@ ApplicationWindow {
         }
 
         RowLayout {
-            Display { id: minutes; pointSize: pointSize; value: { minutesProgress.countDown() } }
-            Point { id: point; pointSize: pointSize; onCountOut: secondsProgress.countIn() }
-            Display { id: seconds; pointSize: pointSize; value: { secondsProgress.countDown() } }
+            Display { Layout.fillWidth: true; Layout.fillHeight: true; id: minutes; pointSize: parent.width/4; value: { minutesProgress.countDown() } }
+            Point { Layout.fillWidth: true; Layout.fillHeight: true; id: point; pointSize: parent.width/4; onCountOut: secondsProgress.countIn() }
+            Display { Layout.fillWidth: true; Layout.fillHeight: true; id: seconds; pointSize: parent.width/4; value: { secondsProgress.countDown() } }
         }
 
         ColumnLayout {

@@ -4,7 +4,6 @@ import QtQuick.Window 2.0
 import QtQuick.Dialogs 1.0
 import QtQuick.Layouts 1.0
 import QtMultimedia 5.0
-import QtQuick.LocalStorage 2.0
 
 ApplicationWindow {
     id: pomoqq
@@ -26,6 +25,11 @@ ApplicationWindow {
     property int pomodoroNumber: 48
     property bool isBreak: false
     property bool progressTimeEditable: false
+
+    SoundEffect { id: ticking; source: "sounds/ticking.wav" }
+    SoundEffect { id: break_ticking; source: "sounds/break_ticking.wav" }
+    SoundEffect { id: alarm;   source: "sounds/alarm.wav" }
+    SoundEffect { id: fiveminuteleft;   source: "sounds/5left.wav" }
 
     signal changeColor
     signal changeState
@@ -93,11 +97,6 @@ ApplicationWindow {
         }
     }
 
-    SoundEffect { id: ticking; source: "sounds/ticking.wav" }
-    SoundEffect { id: break_ticking; source: "sounds/break_ticking.wav" }
-    SoundEffect { id: alarm;   source: "sounds/alarm.wav" }
-    SoundEffect { id: fiveminuteleft;   source: "sounds/5left.wav" }
-
     ColumnLayout {
         width: parent.width
         height: parent.height
@@ -159,21 +158,6 @@ ApplicationWindow {
                     changeState()
                 }
             }
-
-            /*
-            Button {
-                id: progressButton
-                text: "o"
-                Layout.fillWidth: true
-
-                property bool isVisible: false
-
-                onClicked: {
-                    pomoqq.height = (!isVisible) ? 220 : 195
-                    isVisible = !isVisible
-                }
-            }
-            */
         }
 
         Progress { id: pomodoroProgress; maximumValue: pomodoroNumber; Layout.fillWidth: true }

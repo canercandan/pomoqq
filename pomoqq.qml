@@ -1,5 +1,6 @@
 import QtQuick 2.1
 import QtQuick.Controls 1.0
+import QtQuick.Controls.Styles 1.0
 import QtQuick.Window 2.0
 import QtQuick.Dialogs 1.0
 import QtQuick.Layouts 1.0
@@ -26,10 +27,12 @@ ApplicationWindow {
     property bool isBreak: false
     property bool progressTimeEditable: false
 
-    SoundEffect { id: ticking; source: "sounds/ticking.wav" }
-    SoundEffect { id: break_ticking; source: "sounds/break_ticking.wav" }
-    SoundEffect { id: alarm;   source: "sounds/alarm.wav" }
-    SoundEffect { id: fiveminuteleft;   source: "sounds/5left.wav" }
+    SoundEffect { id: ticking; source: "sounds/ticking.wav"; muted: { muteCheckbox.checked } }
+    SoundEffect { id: break_ticking; source: "sounds/break_ticking.wav"; muted: { muteCheckbox.checked } }
+    // SoundEffect { id: break_ticking; source: "sounds/break_ticking.wav"; muted: { setProgress.value == setNumber || muteCheckbox.checked } }
+    SoundEffect { id: alarm;   source: "sounds/alarm.wav"; muted: { muteCheckbox.checked } }
+    SoundEffect { id: fiveminuteleft;   source: "sounds/5left.wav"; muted: { muteCheckbox.checked } }
+    // SoundEffect { id: fiveminuteleft;   source: "sounds/5left.wav"; muted: { setProgress.value == setNumber || muteCheckbox.checked } }
 
     signal changeColor
     signal changeState
@@ -158,10 +161,64 @@ ApplicationWindow {
                     changeState()
                 }
             }
+
+            CheckBox {
+                id: muteCheckbox
+                style: CheckBoxStyle {
+                    label: Label {
+                        color: "white"
+                        text: "Mute"
+                    }
+                }
+                Layout.fillWidth: true
+
+                onClicked: {
+                    console.log("mute");
+                    // ticking.muted = self.checked;
+                }
+            }
         }
 
-        Progress { id: pomodoroProgress; maximumValue: pomodoroNumber; Layout.fillWidth: true }
-        Progress { id: setProgress; maximumValue: setNumber; Layout.fillWidth: true }
-        Progress { id: interruptionProgress; maximumValue: interruptionNumber; Layout.fillWidth: true }
+        RowLayout {
+            Text { text: "#p"; font.bold: true; color: "white"; Layout.preferredWidth: 20 }
+            Progress { id: pomodoroProgress; maximumValue: pomodoroNumber; Layout.fillWidth: true }
+            Button {
+                text: "R"
+                onClicked: {
+                    console.log("reset")
+                    pomodoroProgress.reset()
+                }
+                Layout.preferredWidth: 30
+                Layout.maximumHeight: 23
+            }
+        }
+
+        RowLayout {
+            Text { text: "#b"; font.bold: true; color: "white"; Layout.preferredWidth: 20 }
+            Progress { id: setProgress; maximumValue: setNumber; Layout.fillWidth: true }
+            Button {
+                text: "R"
+                onClicked: {
+                    console.log("reset")
+                    setProgress.reset()
+                }
+                Layout.preferredWidth: 30
+                Layout.maximumHeight: 23
+            }
+        }
+
+        RowLayout {
+            Text { text: "#i"; font.bold: true; color: "white"; Layout.preferredWidth: 20 }
+            Progress { id: interruptionProgress; maximumValue: interruptionNumber; Layout.fillWidth: true }
+            Button {
+                text: "R"
+                onClicked: {
+                    console.log("reset")
+                    interruptionProgress.reset()
+                }
+                Layout.preferredWidth: 30
+                Layout.maximumHeight: 23
+            }
+        }
     }
 }

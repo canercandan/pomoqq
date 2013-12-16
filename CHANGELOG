@@ -1,0 +1,15 @@
+0.1:
+	* added ticking sounds different for break state
+	* progress bar added for interrupts
+	* size fit with the window size
+	* added reset buttons
+	* added mute checkbox in order to mute ticking
+	* added new screeshots
+
+0.0:
+	* added Start/Interrupt button
+	* added Break button in order to change state
+	* added ticking for both pomodoro and break states
+	* progress bar for pomodoros and breaks
+	* fixed an issue with break state
+	* added an alarm sound when there is 5 minutes left and apply for each minutes lesser than 5 minutes.

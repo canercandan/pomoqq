@@ -31,3 +31,7 @@ Other pomodoro timers
 * [tomighty](http://www.tomighty.org/)
 * [tomato.es](http://tomato.es/)
 * [pomodairo](https://code.google.com/p/pomodairo/)
+
+
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/canercandan/pomoqq/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+

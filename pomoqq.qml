@@ -20,19 +20,17 @@ ApplicationWindow {
     property int pointSize: 42
     property int pomodoroTime: 25
     property int shortBreakTime: 5
-    property int longBreakTime: 15
-    property int setNumber: 4
+    property int longBreakTime: 30
+    property int setNumber: 7
     property int interruptionNumber: 50
     property int pomodoroNumber: 48
     property bool isBreak: false
     property bool progressTimeEditable: false
 
     SoundEffect { id: ticking; source: "sounds/ticking.wav"; muted: { muteCheckbox.checked } }
-    SoundEffect { id: break_ticking; source: "sounds/break_ticking.wav"; muted: { muteCheckbox.checked } }
-    // SoundEffect { id: break_ticking; source: "sounds/break_ticking.wav"; muted: { setProgress.value == setNumber || muteCheckbox.checked } }
+    SoundEffect { id: break_ticking; source: "sounds/break_ticking.wav"; muted: { setProgress.value == setNumber || muteCheckbox.checked } }
     SoundEffect { id: alarm;   source: "sounds/alarm.wav"; muted: { muteCheckbox.checked } }
-    SoundEffect { id: fiveminuteleft;   source: "sounds/5left.wav"; muted: { muteCheckbox.checked } }
-    // SoundEffect { id: fiveminuteleft;   source: "sounds/5left.wav"; muted: { setProgress.value == setNumber || muteCheckbox.checked } }
+    SoundEffect { id: fiveminuteleft;   source: "sounds/5left.wav"; muted: { setProgress.value == setNumber || muteCheckbox.checked } }
 
     signal changeColor
     signal changeState

@@ -24,6 +24,7 @@ ApplicationWindow {
     property int setNumber: 7
     property int interruptionNumber: 50
     property int pomodoroNumber: 48
+    property int projectNumber: 1
     property bool isBreak: false
     property bool progressTimeEditable: false
 
@@ -67,6 +68,7 @@ ApplicationWindow {
         if (!isBreak) {
             setProgress.increment()
             pomodoroProgress.increment()
+            projectProgress.increment()
         } else {
             if (setProgress.value >= setNumber) { setProgress.reset() }
         }
@@ -194,6 +196,24 @@ ApplicationWindow {
         RowLayout {
             Text { text: "#b"; font.bold: true; color: "white"; Layout.preferredWidth: 20 }
             Progress { id: setProgress; maximumValue: setNumber; Layout.fillWidth: true }
+            // Button {
+            //     text: "-"
+            //     onClicked: {
+            //         console.log("-")
+            //         setProgress.maximumValue--
+            //     }
+            //     Layout.preferredWidth: 30
+            //     Layout.maximumHeight: 23
+            // }
+            // Button {
+            //     text: "+"
+            //     onClicked: {
+            //         console.log("+")
+            //         setProgress.maximumValue++
+            //     }
+            //     Layout.preferredWidth: 30
+            //     Layout.maximumHeight: 23
+            // }
             Button {
                 text: "R"
                 onClicked: {
@@ -213,6 +233,39 @@ ApplicationWindow {
                 onClicked: {
                     console.log("reset")
                     interruptionProgress.reset()
+                }
+                Layout.preferredWidth: 30
+                Layout.maximumHeight: 23
+            }
+        }
+
+        RowLayout {
+            Text { text: "#P"; font.bold: true; color: "white"; Layout.preferredWidth: 20 }
+            Progress { id: projectProgress; maximumValue: projectNumber; Layout.fillWidth: true }
+            Button {
+                text: "-"
+                onClicked: {
+                    console.log("-")
+                    projectProgress.maximumValue--
+                }
+                Layout.preferredWidth: 30
+                Layout.maximumHeight: 23
+            }
+            Button {
+                text: "+"
+                onClicked: {
+                    console.log("+")
+                    projectProgress.maximumValue++
+                }
+                Layout.preferredWidth: 30
+                Layout.maximumHeight: 23
+            }
+            Button {
+                text: "R"
+                onClicked: {
+                    console.log("reset")
+                    projectProgress.reset()
+                    projectProgress.maximumValue = projectNumber
                 }
                 Layout.preferredWidth: 30
                 Layout.maximumHeight: 23

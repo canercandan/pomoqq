@@ -21,7 +21,7 @@ ProgressBar {
     }
 
     Text {
-        text: { parent.value + '/' + parent.maximumValue }
+        text: { parent.maximumValue-parent.value + '/' + parent.maximumValue + ' (' + parent.value + ')' }
         anchors.centerIn: parent
     }
 

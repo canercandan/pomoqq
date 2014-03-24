@@ -20,18 +20,18 @@ ApplicationWindow {
     property int pointSize: 42
     property int pomodoroTime: 25
     property int shortBreakTime: 5
-    property int longBreakTime: 30
-    property int setNumber: 7
-    property int interruptionNumber: 50
-    property int pomodoroNumber: 48
+    property int longBreakTime: 15
+    property int setNumber: 4
+    property int interruptionNumber: 10
+    property int pomodoroNumber: 25
     property int projectNumber: 1
     property bool isBreak: false
     property bool progressTimeEditable: false
 
-    SoundEffect { id: ticking; source: "sounds/ticking.wav"; muted: { muteCheckbox.checked } }
-    SoundEffect { id: break_ticking; source: "sounds/break_ticking.wav"; muted: { setProgress.value == setNumber || muteCheckbox.checked } }
-    SoundEffect { id: alarm;   source: "sounds/alarm.wav"; muted: { muteCheckbox.checked } }
-    SoundEffect { id: fiveminuteleft;   source: "sounds/5left.wav"; muted: { setProgress.value == setNumber || muteCheckbox.checked } }
+    SoundEffect { id: ticking; source: "sounds/ticking.wav"; muted: { unmuteTickingCheckbox.checked == false } }
+    SoundEffect { id: break_ticking; source: "sounds/break_ticking.wav"; muted: { setProgress.value == setNumber || unmuteTickingCheckbox.checked == false } }
+    SoundEffect { id: alarm;   source: "sounds/alarm.wav"; muted: { unmuteAlarmCheckbox.checked == false } }
+    SoundEffect { id: fiveminuteleft;   source: "sounds/5left.wav"; muted: { setProgress.value == setNumber || unmuteAlarmCheckbox.checked == false } }
 
     signal changeColor
     signal changeState
@@ -163,18 +163,34 @@ ApplicationWindow {
             }
 
             CheckBox {
-                id: muteCheckbox
+                id: unmuteTickingCheckbox
+                checked: true
                 style: CheckBoxStyle {
                     label: Label {
                         color: "white"
-                        text: "Mute"
+                        text: "Tick"
                     }
                 }
                 Layout.fillWidth: true
 
                 onClicked: {
-                    console.log("mute");
-                    // ticking.muted = self.checked;
+                    console.log("unmute tick");
+                }
+            }
+
+            CheckBox {
+                id: unmuteAlarmCheckbox
+                checked: true
+                style: CheckBoxStyle {
+                    label: Label {
+                        color: "white"
+                        text: "Alarm"
+                    }
+                }
+                Layout.fillWidth: true
+
+                onClicked: {
+                    console.log("unmute alarm");
                 }
             }
         }

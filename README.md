@@ -9,10 +9,21 @@ Yet another Pomodoro timer fully written this time thanks to Qt Quick
 ![PomoQQ](https://github.com/canercandan/pomoqq/raw/master/doc/screenshot_short_break.png "PomoQQ Short Break")
 ![PomoQQ](https://github.com/canercandan/pomoqq/raw/master/doc/screenshot_long_break.png "PomoQQ Long Break")
 
-How to
-======
+How to Install
+==============
 
-Install Qt 5.1 and Qt Quick libraries and start pomoqq with the following command:
+Install Qt 5.1 and Qt Quick libraries
+
+On Ubuntu 14.*, use the following command line in order to install the dependencies:
+
+<code>
+sudo apt-get install qt5-default qmlscene qml-module-qtquick-controls qml-module-qtmultimedia
+</code>
+
+How to Start
+============
+
+Start pomoqq with the following command:
 
 <code>
 qmlscene pomoqq.qml
